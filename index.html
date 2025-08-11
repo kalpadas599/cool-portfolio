@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portfolio - Modern Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+    </div>
+
+    <div class="scroll-progress"></div>
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/916290271947" target="_blank" class="whatsapp-float" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Color Picker Widget -->
+    <button class="color-picker-toggle" onclick="toggleColorPicker()">
+        <i class="fas fa-palette"></i>
+    </button>
+    <div class="color-picker-widget" id="colorPicker">
+        <h4 style="margin-bottom: 1rem; color: var(--text-primary); font-size: 1rem;">Choose Your Brand Color</h4>
+        <div>
+            <div class="color-preset" style="background: #3b82f6;" onclick="changeAccentColor('#3b82f6')" title="Blue"></div>
+            <div class="color-preset" style="background: #8b5cf6;" onclick="changeAccentColor('#8b5cf6')" title="Purple"></div>
+            <div class="color-preset" style="background: #ec4899;" onclick="changeAccentColor('#ec4899')" title="Pink"></div>
+            <div class="color-preset" style="background: #10b981;" onclick="changeAccentColor('#10b981')" title="Green"></div>
+            <div class="color-preset" style="background: #f59e0b;" onclick="changeAccentColor('#f59e0b')" title="Orange"></div>
+            <div class="color-preset" style="background: #ef4444;" onclick="changeAccentColor('#ef4444')" title="Red"></div>
+        </div>
+        <input type="color" id="customColorPicker" onchange="changeAccentColor(this.value)" 
+               style="width: 100%; margin-top: 1rem; height: 40px; border: none; border-radius: 10px; cursor: pointer;">
+    </div>
+
+    <!-- Admin Toggle -->
+    <button class="admin-toggle" onclick="toggleAdmin()" title="Admin Panel">
+        <i class="fas fa-cog"></i>
+    </button>
+
+    <!-- Admin Panel -->
+    <div class="admin-overlay" onclick="closeAdmin()"></div>
+    <div class="admin-panel" id="adminPanel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h3>Admin Panel</h3>
+            <button onclick="closeAdmin()" style="background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div style="margin-bottom: 2rem;">
+            <h4>Contact Messages (<span id="messageCount">0</span>)</h4>
+            <button onclick="exportMessages()" class="add-project-btn" style="margin: 1rem 0; width: 100%;">
+                <i class="fas fa-download"></i> Export to Excel
+            </button>
+            <div id="messagesList"></div>
+        </div>
+
+        <div>
+            <h4>Resume Downloads (<span id="downloadCount">0</span>)</h4>
+            <div id="downloadsList"></div>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <a href="#home" class="logo magnetic">Portfolio</a>
+            <ul class="nav-links">
+                <li><a href="#home" class="magnetic">Home</a></li>
+                <li><a href="#about" class="magnetic">About</a></li>
+                <li><a href="#experience" class="magnetic">Experience</a></li>
+                <li><a href="#projects" class="magnetic">Projects</a></li>
+                <li><a href="#resume" class="magnetic">Resume</a></li>
+                <li><a href="#contact" class="magnetic">Contact</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="theme-toggle magnetic" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section with Beautiful Background -->
+        <section id="home" class="section hero">
+            <!-- Animated Background -->
+            <div class="animated-bg">
+                <!-- Particles Container -->
+                <div class="particles-container"></div>
+                
+                <!-- Geometric Shapes -->
+                <div class="geometric-shape shape-square" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+                <div class="geometric-shape shape-hexagon" style="top: 60%; right: 15%; animation-delay: 2s;"></div>
+                <div class="shape-triangle" style="top: 30%; right: 20%; animation-delay: 1s;"></div>
+                <div class="geometric-shape shape-square" style="bottom: 20%; left: 20%; animation-delay: 3s;"></div>
+                <div class="shape-triangle" style="bottom: 40%; right: 10%; animation-delay: 4s;"></div>
+                <div class="geometric-shape shape-hexagon" style="top: 80%; left: 80%; animation-delay: 5s;"></div>
+            </div>
+
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="magnetic">Your Name Here</h1>
+                    <p class="subtitle">Full Stack Developer & UI/UX Designer</p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="cta-button magnetic">View My Work</a>
+                        <a href="#contact" class="cta-button secondary magnetic">Get In Touch</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section with Photo -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="magnetic">About Me</h2>
+                    <p>Passionate developer creating amazing digital experiences</p>
+                </div>
+                
+                <!-- Profile Photo Section -->
+                <div class="profile-section">
+                    <div class="profile-upload magnetic">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiByeD0iMTAwIiBmaWxsPSIjMmEyYTJhIi8+CjxjaXJjbGUgY3g9IjEwMCIgY3k9IjgwIiByPSIzMCIgZmlsbD0iIzY2NjY2NiIvPgo8cGF0aCBkPSJNNjAgMTYwYzAtMzAgMjAtNTAgNDAtNTBzNDAgMjAgNDAgNTB2MTBINjB2LTEweiIgZmlsbD0iIzY2NjY2NiIvPgo8L3N2Zz4=" 
+                             alt="Profile" class="profile-image" id="profileImage">
+                        <div class="upload-overlay">
+                            <i class="fas fa-camera" style="color: white; font-size: 2rem;"></i>
+                        </div>
+                        <input type="file" class="profile-input" id="profileInput" accept="image/*">
+                    </div>
+                    <button onclick="removeProfilePhoto()" class="cta-button secondary" style="margin-top: 1rem;" id="removePhotoBtn">
+                        <i class="fas fa-trash"></i> Remove Photo
+                    </button>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card magnetic">
+                        <h3><i class="fas fa-code"></i> Frontend Development</h3>
+                        <p>Creating responsive and interactive user interfaces using modern technologies like React, Vue.js, and vanilla JavaScript with a focus on performance and user experience.</p>
+                    </div>
+                    <div class="card magnetic">
+                        <h3><i class="fas fa-server"></i> Backend Development</h3>
+                        <p>Building scalable server-side applications with Node.js, Python, and various databases. Experienced in API design and cloud deployment strategies.</p>
+                    </div>
+                    <div class="card magnetic">
+                        <h3><i class="fas fa-palette"></i> UI/UX Design</h3>
+                        <p>Designing intuitive and beautiful user interfaces with a strong understanding of user psychology, accessibility, and modern design principles.</p>
+                    </div>
+                </div>
+
+                <!-- QR Codes Section -->
+                <div class="qr-section">
+                    <div class="section-heading">
+                        <h3 style="color: var(--text-primary); margin-bottom: 2rem; font-size: 2rem;">Connect With Me</h3>
+                        <p style="color: var(--text-secondary);">Scan QR codes to quickly access my social profiles</p>
+                    </div>
+                    <div class="qr-grid" id="qrGrid">
+                        <!-- QR codes will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="magnetic">Experience & Education</h2>
+                    <p>My professional journey and academic background</p>
+                </div>
+
+                <div style="text-align: center; margin-bottom: 3rem;">
+                    <button class="add-project-btn magnetic" onclick="openExperienceModal()">
+                        <i class="fas fa-plus"></i> Add Experience
+                    </button>
+                    <button class="add-project-btn magnetic" onclick="openEducationModal()">
+                        <i class="fas fa-graduation-cap"></i> Add Education
+                    </button>
+                </div>
+
+                <div class="timeline" id="experienceTimeline">
+                    <!-- Timeline items will be added here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="magnetic">My Projects</h2>
+                    <p>Here are some of my recent works that showcase my skills and creativity</p>
+                </div>
+                
+                <div class="project-controls">
+                    <button class="add-project-btn magnetic" onclick="openProjectModal()">
+                        <i class="fas fa-plus"></i> Add New Project
+                    </button>
+                    <button class="add-project-btn magnetic" onclick="clearAllProjects()" style="background: #dc3545;">
+                        <i class="fas fa-trash"></i> Clear All
+                    </button>
+                </div>
+                
+                <div id="projectsContainer">
+                    <!-- Projects will be added here dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume" class="section">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="magnetic">Resume</h2>
+                    <p>Download my latest resume or view it online</p>
+                </div>
+
+                <div class="resume-upload">
+                    <h3><i class="fas fa-file-pdf"></i> Upload Your Resume</h3>
+                    <p style="margin: 1rem 0; color: var(--text-secondary);">Upload your resume (PDF format recommended)</p>
+                    <input type="file" id="resumeInput" accept=".pdf,.doc,.docx" style="display: none;">
+                    <button onclick="document.getElementById('resumeInput').click()" class="cta-button magnetic">
+                        <i class="fas fa-upload"></i> Choose File
+                    </button>
+                    
+                    <div class="resume-display" id="resumeDisplay" style="display: none;">
+                        <h4>Current Resume</h4>
+                        <p id="resumeFileName" style="margin: 1rem 0; color: var(--accent);"></p>
+                        <div style="margin-top: 1rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            <button onclick="downloadResume()" class="cta-button magnetic">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                            <button onclick="removeResume()" class="cta-button secondary magnetic">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-heading">
+                    <h2 class="magnetic">Get In Touch</h2>
+                    <p>Let's work together on your next amazing project</p>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" required></textarea>
+                        </div>
+                        <div style="text-align: center;">
+                            <button type="submit" class="cta-button magnetic">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Beautiful Footer with Social Media -->
+    <footer>
+        <div class="footer-content">
+            <div class="section-heading" style="margin-bottom: 3rem;">
+                <h3 style="color: var(--text-primary); font-size: 2rem; margin-bottom: 1rem;">Let's Connect</h3>
+                <p>Follow me on social media for updates and insights</p>
+            </div>
+            
+            <div class="footer-social" id="footerSocial">
+                <!-- Social media icons will be generated here -->
+            </div>
+            
+            <div class="footer-info">
+                <p>&copy; 2025 Your Name. All rights reserved.</p>
+                <p style="margin-top: 0.5rem;">
+                    Built with ❤️ using modern web technologies
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">
+                    <i class="fas fa-map-marker-alt"></i> Based in Your City, Country
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('projectModal')">&times;</button>
+            <h3 style="margin-bottom: 2rem; color: var(--accent);">Add New Project</h3>
+            <form id="projectForm">
+                <div class="form-group">
+                    <label>Project Name</label>
+                    <input type="text" id="projectName" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="projectDescription" required rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Technologies Used</label>
+                    <input type="text" id="projectTech" placeholder="React, Node.js, MongoDB...">
+                </div>
+                <div class="form-group">
+                    <label>Live Demo URL</label>
+                    <input type="url" id="projectDemo" placeholder="https://your-project.com">
+                </div>
+                <div class="form-group">
+                    <label>GitHub URL</label>
+                    <input type="url" id="projectGithub" placeholder="https://github.com/username/project">
+                </div>
+                <div class="form-group">
+                    <label>Project Image</label>
+                    <input type="file" id="projectImage" accept="image/*">
+                </div>
+                <div style="text-align: center;">
+                    <button type="submit" class="cta-button">
+                        <i class="fas fa-plus"></i> Add Experience
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="educationModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('educationModal')">&times;</button>
+            <h3 style="margin-bottom: 2rem; color: var(--accent);">Add Education</h3>
+            <form id="educationForm">
+                <div class="form-group">
+                    <label>Institution</label>
+                    <input type="text" id="eduInstitution" required>
+                </div>
+                <div class="form-group">
+                    <label>Degree/Course</label>
+                    <input type="text" id="eduDegree" required>
+                </div>
+                <div class="form-group">
+                    <label>Field of Study</label>
+                    <input type="text" id="eduField" placeholder="Computer Science, Business...">
+                </div>
+                <div class="form-group">
+                    <label>Start Year</label>
+                    <input type="number" id="eduStartYear" min="1950" max="2030" required>
+                </div>
+                <div class="form-group">
+                    <label>End Year (Leave empty if ongoing)</label>
+                    <input type="number" id="eduEndYear" min="1950" max="2030">
+                </div>
+                <div class="form-group">
+                    <label>Grade/CGPA (Optional)</label>
+                    <input type="text" id="eduGrade" placeholder="8.5 CGPA, 85%, First Class...">
+                </div>
+                <div style="text-align: center;">
+                    <button type="submit" class="cta-button">
+                        <i class="fas fa-plus"></i> Add Education
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
